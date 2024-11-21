@@ -6,7 +6,7 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 from starlette import status
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from database import SessionLocal
 from jose import JWTError
 import jwt
@@ -31,6 +31,7 @@ class Token(BaseModel):
 
 class User_request(BaseModel):
     username: str
+    email: EmailStr
     password: str
 
 def get_db():
@@ -44,47 +45,54 @@ db_dependency = Annotated[Session, Depends(get_db)]
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_user(db: db_dependency, create_user_request: User_request):
-    # Проверяем, занят ли никнейм
-    existing_user = db.query(User_reg).filter(User_reg.username == create_user_request.username).first()
+    existing_user = db.query(User_reg).filter(
+        (User_reg.username == create_user_request.username) | 
+        (User_reg.email == create_user_request.email)
+    ).first()
+    
     if existing_user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Username already taken"
+            detail="Username or email already taken"
         )
     
-    # Создаем нового пользователя
     create_user_model = User_reg(
         username=create_user_request.username,
+        email=create_user_request.email,
         hashed_password=pwd_context.hash(create_user_request.password),
     )
     db.add(create_user_model)
     db.commit()
     return {"message": "User created successfully"}
 
- 
+
 @router.post("/token", response_model=Token)
 async def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
     db : db_dependency
-    ):
+):
     user = authenticate_user(db, form_data.username, form_data.password)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
+            detail="Incorrect email or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
     token = create_access_token(user.username, user.id, timedelta(minutes=30))
     return {'access_token': token, 'token_type': 'bearer'}
 
-
-def authenticate_user(db, username: str, password: str):
-    user = db.query(User_reg).filter(User_reg.username == username).first()
+def authenticate_user(db, identifier: str, password: str):
+    user = db.query(User_reg).filter(
+        (User_reg.username == identifier) | 
+        (User_reg.email == identifier)
+    ).first()
+    
     if not user:
         return False
     if not verify_password(password, user.hashed_password):
         return False
     return user
+
 
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
