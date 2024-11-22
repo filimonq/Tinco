@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import styles from "./styles.module.scss";
+import Header from '../../providers/layout/header.jsx';
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 function Login() {
   return (
+    <>
+    <Header />
     <div className={styles.container}>
         <div className={styles.formField}>
             <div className={styles.header}>
@@ -57,6 +60,7 @@ function Login() {
             </Formik>
         </div>
     </div>
+  </>
   )
 }
 

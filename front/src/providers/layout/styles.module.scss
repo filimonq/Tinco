@@ -5,8 +5,8 @@
 }
 
 
-.container{
-    background-color: $primary;
+.container {
+    background-color: $light-gray;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -14,7 +14,7 @@
     padding: 10px 40px;
 
 
-    .logo{
+    .logo {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -22,6 +22,20 @@
 
         h1{
             margin-left: 20px;
+        }
+    }
+
+    .content {
+        .menu {
+            display: flex;
+            font-size: large;
+            justify-content: space-around;
+            align-items: center;
+            gap: 20px;
+
+            a {
+                color: $active3
+            }
         }
     }
 
