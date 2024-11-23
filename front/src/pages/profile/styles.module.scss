@@ -1,75 +1,164 @@
 @import '../../commons/styles.module.scss';
 
+html, body {
+  margin: 0; /* Убираем отступы */
+  padding: 0; /* Убираем внутренние отступы */
+  height: 100%; /* Гарантируем, что html и body занимают всю высоту экрана */
+  overflow: hidden; /* Отключаем прокрутку на странице */
+  box-sizing: border-box;
+}
+
+
 .container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 20px;
-  }
-  
-  .tableWrapper {
-    width: 66%; /* Таблица будет занимать 2/3 ширины */
-    margin-top: 20px;
-    margin-left: auto; /* Выравнивание таблицы по правому краю */
-    margin-right: auto; /* Центрируем таблицу */
-    overflow-y: auto; /* Вертикальная прокрутка для таблицы */
-    max-height: 500px; /* Ограничиваем максимальную высоту */
-  }
-  
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .table th, .table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
-  }
-  
-  .table th {
-    background-color: #f4f4f4;
-  }
-  
-  .table tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .tableHeader {
-    position: sticky;
-    top: 0;
-    background-color: #fff;
-    z-index: 1;
-  }
-  
-  .uploadWrapper {
-    width: 66%; /* Кнопка будет занимать 2/3 ширины */
-    margin-top: 20px;
-    text-align: center;
-    margin-left: auto; /* Выравнивание кнопки по правому краю */
-    margin-right: auto; /* Центрируем кнопку */
-  }
-  
-  .uploadInput {
-    display: none; /* Скрываем стандартный input, используем кнопку для загрузки */
-  }
-  
-  .uploadButton {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: $active3; /* Синий фон */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .uploadButton:hover {
-    background-color: #6f0505; /* Более темный оттенок синего при наведении */
-  }
-  
-  .uploadButton:focus {
-    outline: none; /* Убираем обводку при фокусе */
-  }
-  
+  display: flex;
+  flex-direction: column; /* Располагаем элементы вертикально */
+  justify-content: flex-start; /* Элементы начинаются от верха контейнера */
+  align-items: flex-start; /* Выравнивание элементов по левому краю */
+  padding: 20px; /* Отступы от краев */
+  box-sizing: border-box; /* Учитываем отступы в общей ширине */
+  height: calc(100vh - 60px); /* Высота экрана за вычетом высоты хедера */
+  overflow-y: auto; /* Добавляем прокрутку, если контент превышает доступное пространство */
+}
+
+.tableWrapper {
+  width: 65%; /* Таблица занимает 70% ширины контейнера */
+  overflow-y: auto; /* Прокрутка по вертикали */
+  max-height: 80%; /* Ограничиваем максимальную высоту */
+  margin-left: 2%;
+}
+
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f4f4f4;
+}
+
+.table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.tableHeader {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.buttonsContainer {
+  display: flex; /* Располагаем кнопки в строку */
+  justify-content: space-around; /* Равномерное расстояние между кнопками */
+  align-items: center; /* Центрируем по вертикали */
+  margin-top: auto; /* Сдвигаем блок с кнопками вниз */
+  margin-bottom: 30px; /* Поднимает кнопки */
+  padding: 20px; /* Добавляем отступы вокруг кнопок */
+  gap: 20px; /* Увеличиваем расстояние между кнопками */
+}
+
+.uploadWrapper {
+  margin: 0; /* Убираем лишние отступы */
+}
+
+.uploadButton {
+  padding: 10px 30px; /* Увеличиваем кнопки для лучшей читаемости */
+  font-size: 16px; /* Увеличиваем шрифт кнопок */
+  background-color: $active3; /* Основной цвет кнопки */
+  color: white;
+  border: none;
+  border-radius: 8px; /* Закругляем края */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+.uploadInput {
+  display: none; /* Скрываем стандартный input */
+}
+
+.uploadButton:hover {
+  background-color: #6f0505; /* Темный оттенок кнопки при наведении */
+}
+
+.uploadButton:focus {
+  outline: none; /* Убираем обводку при фокусе */
+}
+
+.table td input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.buttonStyle {
+  background-color: $colorpink;
+  color: white;
+}
+
+.absolutePanelWrapper {
+  position: relative; /* Чтобы абсолютные панели могли корректно позиционироваться */
+  display: block; /* Убедитесь, что контейнер видим */
+  width: 100%; /* Занимает всю ширину */
+  height: auto; /* Высота подстраивается под контент */
+}
+
+.panel1,
+.panel2 {
+  position: absolute; /* Сохраняем абсолютное позиционирование */
+  right: 30px; /* Смещение вправо */
+  width: 25%; /* Общая ширина */
+  height: 30%; /* Высота панели */
+  background-color: #f8f9fa;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow-y: auto;
+  z-index: -2;
+}
+
+.panel1 {
+  top: 145px; /* Первая панель */
+}
+
+.panel2 {
+  top: calc(145px + 35% + 30px); /* Вторая панель ниже первой */
+}
+
+
+/* Заголовок панелей с фоном $colorpink */
+.panel1 h3, .panel2 h3 {
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+  color: white; /* Цвет текста */
+}
+
+.panel1 h3::before, .panel2 h3::before {
+  content: '';
+  display: block;
+  background-color: $colorpink; /* Цвет шапки */
+  height: 63px; /* Высота шапки */
+  border-radius: 5px 5px 0 0; /* Скругление только верхних углов */
+  position: absolute; /* Абсолютное позиционирование для наложения */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1; /* Помещает шапку под текст */
+}
+
+
+/* Пример для панели с текстом */
+.panel1, .panel2 p {
+  line-height: 1.6;
+}
