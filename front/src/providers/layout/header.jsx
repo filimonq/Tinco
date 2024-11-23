@@ -15,7 +15,6 @@ function Header() {
 
             <div className={styles.content}>
                 <div className={styles.menu}>
-                    <Link to="/">Home</Link>
                     <Link to="/login">Login</Link>
                     <Link to="/register">Singin</Link>
                     <Link to="/profile">Личный кабинет</Link>
@@ -24,6 +23,7 @@ function Header() {
                 </div>
             </div>
         </div>
+        <Outlet/>
     </>
   )
 }

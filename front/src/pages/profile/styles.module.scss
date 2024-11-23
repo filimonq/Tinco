@@ -1,9 +1,75 @@
 @import '../../commons/styles.module.scss';
 
 .container {
-
     display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px;
+  }
+  
+  .tableWrapper {
+    width: 66%; /* Таблица будет занимать 2/3 ширины */
+    margin-top: 20px;
+    margin-left: auto; /* Выравнивание таблицы по правому краю */
+    margin-right: auto; /* Центрируем таблицу */
+    overflow-y: auto; /* Вертикальная прокрутка для таблицы */
+    max-height: 500px; /* Ограничиваем максимальную высоту */
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #f4f4f4;
+  }
+  
+  .table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .tableHeader {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 1;
+  }
+  
+  .uploadWrapper {
+    width: 66%; /* Кнопка будет занимать 2/3 ширины */
+    margin-top: 20px;
+    text-align: center;
+    margin-left: auto; /* Выравнивание кнопки по правому краю */
+    margin-right: auto; /* Центрируем кнопку */
+  }
+  
+  .uploadInput {
+    display: none; /* Скрываем стандартный input, используем кнопку для загрузки */
+  }
+  
+  .uploadButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: $active3; /* Синий фон */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .uploadButton:hover {
+    background-color: #6f0505; /* Более темный оттенок синего при наведении */
+  }
+  
+  .uploadButton:focus {
+    outline: none; /* Убираем обводку при фокусе */
+  }
+  
