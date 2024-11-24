@@ -78,7 +78,8 @@ async def upload_files(
     db_session.commit()
     return {"message": "Data loaded successfully"}
 
-@router.get("/{user_id}/all-cows")
-def get_cows_by_owner(user_id: int, db: db_dependency):
+@router.get("/my-cows")
+def get_my_cows(db: db_dependency, current_user: current_user_dependency):
+    user_id = current_user["id"]
     cows = db.query(Cow).filter(Cow.owner_id == user_id).all()
     return {"cows": [cow.__dict__ for cow in cows]}
