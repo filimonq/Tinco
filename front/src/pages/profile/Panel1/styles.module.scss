@@ -1,0 +1,131 @@
+@import '../../../commons/styles.module.scss';
+
+// Стили для меток слайдера
+.sliderLabels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 5px;
+    font-size: 12px; // Размер шрифта для цифр
+    color: #666; // Цвет текста
+
+    span {
+        user-select: none; // Запрещаем выделение текста
+    }
+}
+
+// Стили для контейнера слайдера
+.sliderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+  height: 5px;
+  background: #ddd;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        background-color: $colorpink; // Цвет бегунка
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+        background-color: $colorpink; // Цвет бегунка для Firefox
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    width: 100%;
+}
+
+// Стили для панели
+.panel1 {
+    position: absolute; // Абсолютное позиционирование
+    top: 145px; // Смещение вниз
+    right: 30px; // Смещение вправо
+    width: 25%; // Общая ширина
+    height: 30%; // Высота панели
+    background-color: #f8f9fa;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow-y: auto;
+    z-index: 10;
+
+    h3 {
+        margin: 0;
+        padding: 0;
+        font-size: 18px;
+        color: white; // Цвет текста
+        margin-bottom: 30px;
+        //position: sticky;
+
+        &::before {
+            content: '';
+            display: block;
+            background-color: $colorpink; // Цвет шапки
+            height: 63px; // Высота шапки
+            border-radius: 5px 5px 0 0; // Скругление верхних углов
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: -1; // Помещает шапку под текст
+        }
+    }
+
+    div {
+        margin-bottom: 7px;
+    }
+}
+
+    .checkboxLabel {
+        display: flex;
+        align-items: center; /* Выравнивание по центру по вертикали */
+        gap: 10px; /* Отступ между чекбоксом и текстом */
+        font-size: 14px; /* Размер шрифта для текста */
+    }
+    
+    .customCheckbox {
+        appearance: none; /* Убираем стандартный чекбокс */
+        width: 20px;
+        height: 20px;
+        background-color: rgb(255, 255, 255); /* Цвет фона */
+        color: rgb(255, 255, 255); /* Цвет текста */
+        border: 2px solid #ccc; /* Рамка чекбокса */
+        border-radius: 4px;
+        cursor: pointer;
+        position: relative;
+        transition: background-color 0.3s ease;
+        vertical-align: middle; /* Выравнивание по вертикали */
+        
+        // Стили для активного состояния чекбокса
+        &:checked {
+        background-color: $colorpink; /* Цвет при активном состоянии */
+        }
+    
+        &:hover {
+        background-color: darken($colorpink, 10%); /* Затемнение на 10% при наведении */
+        }
+    
+        &:active {
+        background-color: lighten($colorpink, 10%); /* Осветление на 10% при нажатии */
+        }
+    }
+  
+
+

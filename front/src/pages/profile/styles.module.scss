@@ -25,6 +25,7 @@ html, body {
   overflow-y: auto; /* Прокрутка по вертикали */
   max-height: 80%; /* Ограничиваем максимальную высоту */
   margin-left: 2%;
+  margin-top: 20px;
 }
 
 
@@ -60,7 +61,7 @@ html, body {
   justify-content: space-around; /* Равномерное расстояние между кнопками */
   align-items: center; /* Центрируем по вертикали */
   margin-top: auto; /* Сдвигаем блок с кнопками вниз */
-  margin-bottom: 30px; /* Поднимает кнопки */
+  margin-bottom: 50px; /* Поднимает кнопки */
   padding: 20px; /* Добавляем отступы вокруг кнопок */
   gap: 20px; /* Увеличиваем расстояние между кнопками */
 }
@@ -110,55 +111,4 @@ html, body {
   display: block; /* Убедитесь, что контейнер видим */
   width: 100%; /* Занимает всю ширину */
   height: auto; /* Высота подстраивается под контент */
-}
-
-.panel1,
-.panel2 {
-  position: absolute; /* Сохраняем абсолютное позиционирование */
-  right: 30px; /* Смещение вправо */
-  width: 25%; /* Общая ширина */
-  height: 30%; /* Высота панели */
-  background-color: #f8f9fa;
-  padding: 20px;
-  border: 1px solid #ccc;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow-y: auto;
-  z-index: -2;
-}
-
-.panel1 {
-  top: 145px; /* Первая панель */
-}
-
-.panel2 {
-  top: calc(145px + 35% + 30px); /* Вторая панель ниже первой */
-}
-
-
-/* Заголовок панелей с фоном $colorpink */
-.panel1 h3, .panel2 h3 {
-  padding: 0;
-  margin: 0;
-  font-size: 18px;
-  color: white; /* Цвет текста */
-}
-
-.panel1 h3::before, .panel2 h3::before {
-  content: '';
-  display: block;
-  background-color: $colorpink; /* Цвет шапки */
-  height: 63px; /* Высота шапки */
-  border-radius: 5px 5px 0 0; /* Скругление только верхних углов */
-  position: absolute; /* Абсолютное позиционирование для наложения */
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: -1; /* Помещает шапку под текст */
-}
-
-
-/* Пример для панели с текстом */
-.panel1, .panel2 p {
-  line-height: 1.6;
 }

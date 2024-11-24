@@ -2,12 +2,23 @@ import React, { useState } from "react";
 import * as XLSX from "xlsx";
 import styles from "./styles.module.scss";
 import Header from "../../providers/layout/header.jsx";
+import Panel1 from "./Panel1/panel1.jsx"
+import Panel2 from "./Panel2/panel2.jsx"
 
 function Profile() {
   // Состояния для таблиц
   const [tableData, setTableData] = useState({ cows: [], muts: [] });
   const [headers, setHeaders] = useState({ cows: [], muts: [] });
   const [editingCell, setEditingCell] = useState({ cows: { rowIndex: null, colIndex: null }, muts: { rowIndex: null, colIndex: null } });
+
+  const breeds = [
+    "Симентальская",
+    "Герефорд",
+    "Швицкая",
+    "Айрширская",
+    "Голштинская",
+    "Любая"
+  ];
 
   // Состояние для текущего режима (между коровами и мутациями)
   const [mode, setMode] = useState("mode1");
@@ -129,19 +140,8 @@ function Profile() {
         
           {/* Панели справа */}
         <div className={styles.panelWrapper}>
-          {/* Первая панель */}
-          <div className={styles.panel1}>
-            <h3>Информация 1</h3>
-            <p>Здесь может быть любая информация для первой панели. Прокрутка будет включена, если контент будет слишком большим.</p>
-            <p>Текст на панели будет прокручиваться.</p>
-          </div>
-
-          {/* Вторая панель */}
-          <div className={styles.panel2}>
-            <h3>Информация 2</h3>
-            <p>Здесь может быть любая информация для второй панели. Она будет иметь такую же прокрутку, если контент будет превышать её высоту.</p>
-            <p>Текст на второй панели также будет прокручиваться.</p>
-          </div>
+          <Panel1/>
+          <Panel2 breeds = {breeds}/>
         </div>
         
       </div>
