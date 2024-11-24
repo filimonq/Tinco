@@ -21,12 +21,15 @@ def get_db():
         db.close()
 
 db_dependency = Annotated[Session, Depends(get_db)]
+current_user_dependency = Annotated[User_reg, Depends(get_current_user)]
 
 @router.post("/upload-files/")
 async def upload_files(
     file1: UploadFile = File(...),
-    file2: UploadFile = File(...)
+    file2: UploadFile = File(...), 
+    current_user: dict = Depends(get_current_user)
 ):
+    user_id = current_user.get('id') 
     file1_contents = await file1.read()
     file2_contents = await file2.read()
 
@@ -51,8 +54,8 @@ async def upload_files(
             weight_gain=str(row.get('Прирост веса кг/день')) if row.get('Прирост веса кг/день') else None,
             health=str(row.get('Здоровье (1-10)')) if row.get('Здоровье (1-10)') else None,
             fertility=str(row.get('Фертильность (%)')) if row.get('Фертильность (%)') else None,
-            genetic_value=str(row.get('Генетическая ценность (баллы)')) if row.get('Генетическая ценность (баллы)') else None
-            # owner_id = user_id какой то там
+            genetic_value=str(row.get('Генетическая ценность (баллы)')) if row.get('Генетическая ценность (баллы)') else None,
+            owner_id=user_id
         )
         db_session.add(cow)
 
@@ -74,3 +77,8 @@ async def upload_files(
 
     db_session.commit()
     return {"message": "Data loaded successfully"}
+
+@router.get("/{user_id}/all-cows")
+def get_cows_by_owner(user_id: int, db: db_dependency):
+    cows = db.query(Cow).filter(Cow.owner_id == user_id).all()
+    return {"cows": [cow.__dict__ for cow in cows]}
